@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jithin & Mariya | Our Eternal Journey</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --ivory: #FFFFF0;
+            --dark: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--ivory);
+            cursor: none; /* Custom cursor */
+        }
+
+        .font-serif { font-family: 'Cinzel', serif; }
+        .font-script { font-family: 'Great Vibes', cursive; }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 20px; height: 20px; background: var(--gold);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s;
+        }
+
+        /* Cinematic Grain & Vignette */
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 150%);
+            pointer-events: none; z-index: 20;
+        }
+
+        /* Animated Progress Bar */
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; background: var(--gold);
+            z-index: 100; width: 0%;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .hero-title {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Floating Hearts Animation */
+        .heart-particle {
+            position: fixed; color: var(--gold); opacity: 0.3; pointer-events: none; z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <audio id="weddingMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="cursor"></div>
+    <div class="progress-bar"></div>
+    <div class="vignette"></div>
+
+    <div class="fixed bottom-8 right-8 z-50">
+        <button id="musicToggle" class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all">
+            <i class="fa-solid fa-music"></i>
+        </button>
+    </div>
+
+    <nav class="fixed w-full z-50 py-6 px-12 flex justify-between items-center transition-all duration-500" id="navbar">
+        <div class="text-3xl font-serif text-gold tracking-widest font-bold">J <span class="text-sm align-middle">&</span> M</div>
+        <div class="hidden md:flex space-x-12 text-[10px] tracking-[0.3em] uppercase">
+            <a href="#home" class="hover:text-gold transition">Intro</a>
+            <a href="#story" class="hover:text-gold transition">Our Odyssey</a>
+            <a href="#gallery" class="hover:text-gold transition">Moments</a>
+            <a href="#details" class="hover:text-gold transition">The Day</a>
+            <a href="#rsvp" class="border border-gold px-6 py-2 hover:bg-gold hover:text-black transition">RSVP</a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="hero1.jpg" 
+                 class="w-full h-full object-cover scale-110 blur-[2px]" id="hero-img">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+        
+        <div class="relative z-10">
+            <p class="font-serif tracking-[1em] text-gold mb-8 text-xs md:text-sm uppercase animate-pulse">Save the Date</p>
+            <h1 class="hero-title font-script text-8xl md:text-[12rem] text-white leading-none mb-4">Jithin <span class="text-4xl block md:inline font-serif">&</span> Mariya</h1>
+            <div class="w-32 h-px bg-gold mx-auto mb-8"></div>
+            <p class="font-serif italic text-xl md:text-2xl tracking-[0.2em] mb-4">07 • 05 • 2026</p>
+            <p class="text-sm opacity-60 font-light tracking-widest">ST. MARY'S FORANE CHURCH, ALAKODE</p>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold text-xs tracking-widest uppercase opacity-50">
+            Scroll to Begin<br>
+            <i class="fa-solid fa-chevron-down mt-4 animate-bounce"></i>
+        </div>
+    </section>
+
+    <section id="story" class="py-32 px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-20">
+                <div class="relative w-full md:w-1/2" data-aos="fade-right">
+                    <div class="absolute -top-10 -left-10 w-64 h-64 border border-gold/20 hidden md:block"></div>
+                    <img src="NEE03104.jpg" class="relative z-10 grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl" alt="Our Story">
+                </div>
+                <div class="w-full md:w-1/2 space-y-8" data-aos="fade-left">
+                    <h2 class="font-serif text-5xl text-gold">The First Chapter</h2>
+                    <p class="text-lg leading-relaxed font-light opacity-80 italic">"We started as strangers in a PSC academy, lockdown separated us... but destiny had other plans."</p>
+                    <p class="leading-relaxed opacity-70">
+                        What started as a simple chat evolved into a deep, silent understanding. Without even saying the words, our souls knew. He became my peace, my strength, and my home.
+                    </p>
+                    <div class="pt-8 border-t border-gold/20 flex items-center space-x-6">
+                        <div class="text-center">
+                            <span class="block font-serif text-2xl text-gold">07</span>
+                            <span class="text-[10px] uppercase tracking-widest">May 2026</span>
+                        </div>
+                        <div class="h-10 w-px bg-gold/30"></div>
+                        <p class="text-sm font-serif tracking-widest uppercase">The Forever Begins</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-32 bg-zinc-950">
+        <div class="px-12 mb-16 flex justify-between items-end">
+            <div>
+                <p class="text-gold tracking-widest text-xs uppercase mb-2">Cinematic Stills</p>
+                <h2 class="font-serif text-4xl">Gallery of Love</h2>
+            </div>
+            <p class="hidden md:block text-xs italic opacity-40">Scroll to explore our moments →</p>
+        </div>
+        
+        <div class="flex space-x-6 overflow-x-auto pb-12 px-12 no-scrollbar" id="filmstrip">
+            <div class="min-w-[300px] md:min-w-[450px] h-[600px] overflow-hidden group border border-white/5">
+                <img src="NEE03597.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="min-w-[300px] md:min-w-[450px] h-[600px] overflow-hidden group border border-white/5 translate-y-12">
+                <img src="NEE03751.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="min-w-[300px] md:min-w-[450px] h-[600px] overflow-hidden group border border-white/5">
+                <img src="NEE03690.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+        </div>
+    </section>
+
+    <section id="details" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto glass-card p-12 md:p-20 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-10 opacity-10">
+                <i class="fa-solid fa-rings-wedding text-9xl text-gold"></i>
+            </div>
+            
+            <h2 class="font-serif text-5xl mb-16 text-gold">The Wedding</h2>
+            
+            <div class="grid md:grid-cols-2 gap-16 text-left border-b border-gold/10 pb-16">
+                <div>
+                    <h4 class="font-serif text-lg tracking-widest text-gold mb-4 uppercase">Ceremony</h4>
+                    <p class="text-2xl mb-2">9:00 AM</p>
+                    <p class="opacity-70 leading-relaxed">
+                        St. Mary's Syro-Malabar Forane Church<br>
+                        Alakode, Kerala
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block mt-6 text-xs border-b border-gold pb-1 tracking-widest hover:text-gold transition">GET DIRECTIONS</a>
+                </div>
+                <div>
+                    <h4 class="font-serif text-lg tracking-widest text-gold mb-4 uppercase">Celebration</h4>
+                    <p class="text-2xl mb-2">6:00 PM</p>
+                    <p class="opacity-70 leading-relaxed">
+                        Cocktails, Dinner & Dancing<br>
+                        Followed by the Reception
+                    </p>
+                    <div class="mt-6 flex space-x-4">
+                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=CHURCH_LOCATION" class="w-16 h-16 border border-gold/20 p-1" alt="QR">
+                         <p class="text-[10px] italic opacity-40">Scan to save<br>location</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="countdown" class="mt-16 flex justify-center space-x-4 md:space-x-12">
+                <div class="text-center">
+                    <span id="days" class="block text-5xl font-serif text-gold">00</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] opacity-40">Days</span>
+                </div>
+                <div class="text-center">
+                    <span id="hours" class="block text-5xl font-serif text-gold">00</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] opacity-40">Hours</span>
+                </div>
+                <div class="text-center">
+                    <span id="minutes" class="block text-5xl font-serif text-gold">00</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] opacity-40">Minutes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="details" class="py-32 px-6 bg-zinc-900/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-serif text-5xl text-gold mb-4">Location & Directions</h2>
+                <div class="w-24 h-px bg-gold mx-auto opacity-30"></div>
+            </div>
+    
+            <div class="grid md:grid-cols-2 gap-12 items-stretch">
+                
+                <div class="glass-card p-10 flex flex-col justify-between" data-aos="fade-right">
+                    <div>
+                        <i class="fa-solid fa-church text-gold text-4xl mb-6"></i>
+                        <h3 class="font-serif text-3xl mb-4">The Ceremony</h3>
+                        <p class="text-xl text-gold/80 mb-2">St. Mary's Syro-Malabar Forane Church</p>
+                        <p class="opacity-70 leading-relaxed mb-8">
+                            Alakode, Kerala 670571<br>
+                            Kannur District, India
+                        </p>
+                    </div>
+    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center">
+                                <i class="fa-solid fa-car text-gold"></i>
+                            </div>
+                            <p class="text-xs tracking-widest opacity-60 uppercase">Ample parking available at venue</p>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-gold/10 flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://maps.app.goo.gl/szIyLfZEpDsRHx7em" 
+                                     alt="Location QR" class="w-20 h-20 border-2 border-gold/20 p-1 bg-white">
+                                <p class="text-[10px] italic opacity-50 uppercase tracking-tighter">Scan to navigate<br>on your phone</p>
+                            </div>
+                            <a href="https://maps.app.goo.gl/szIyLfZEpDsRHx7em" target="_blank" 
+                               class="bg-gold text-black px-8 py-3 font-serif text-xs tracking-[0.2em] hover:bg-white transition-all duration-500">
+                               OPEN IN MAPS
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="relative h-[500px] md:h-auto rounded-sm overflow-hidden border border-gold/20 shadow-2xl group" data-aos="fade-left">
+                    <div class="absolute inset-0 bg-gold/10 pointer-events-none z-10 group-hover:opacity-0 transition-opacity duration-700"></div>
+                    <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.633917846503!2d75.6429399!3d12.2355556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba444f62d3232b3%3A0x7e5dd19498de1e1f!2sSt.%20Mary&#39;s%20Syro-Malabar%20Forane%20Church%2C%20Alakode!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-32 px-6 bg-zinc-950">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="font-script text-7xl text-gold mb-8">Join our Story</h2>
+            <p class="font-serif tracking-widest text-sm mb-12 opacity-50 uppercase">We would love to have you with us</p>
+            
+            <form class="space-y-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <input type="text" placeholder="YOUR NAME" class="bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase">
+                    <input type="email" placeholder="EMAIL ADDRESS" class="bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase">
+                </div>
+                <textarea placeholder="A MESSAGE FOR THE COUPLE" rows="4" class="w-full bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase"></textarea>
+                <button class="px-16 py-4 bg-gold text-black font-serif tracking-[0.5em] hover:bg-white transition-all duration-500 uppercase text-xs">Confirm Attendance</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-gold/5">
+        <div class="font-serif text-4xl tracking-[0.8em] text-gold/30 mb-8">J & M</div>
+        <p class="text-[10px] tracking-[0.5em] opacity-30 uppercase font-light">With God's grace and your blessings</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1500, once: true });
+
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Scroll Progress Bar
+        window.onscroll = () => {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.querySelector(".progress-bar").style.width = scrolled + "%";
+            
+            // Navbar Blur on Scroll
+            if (winScroll > 50) {
+                document.getElementById('navbar').classList.add('bg-black/80', 'backdrop-blur-md');
+            } else {
+                document.getElementById('navbar').classList.remove('bg-black/80', 'backdrop-blur-md');
+            }
+        };
+
+        // GSAP Parallax & Reveal
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.to("#hero-img", {
+            scrollTrigger: { scrub: true },
+            y: 200, scale: 1.5, filter: "blur(10px)"
+        });
+
+        // Countdown Timer
+        const weddingDate = new Date("May 07, 2026 09:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        }, 1000);
+
+        // Music Toggle (Placeholder Logic)
+        const music = document.getElementById('weddingMusic');
+const musicBtn = document.getElementById('musicToggle');
+const musicIcon = musicBtn.querySelector('i');
+
+musicBtn.onclick = () => {
+    if (music.paused) {
+        music.play();
+        musicBtn.classList.add('bg-gold', 'text-black', 'animate-spin-slow');
+        musicIcon.classList.replace('fa-music', 'fa-pause');
+    } else {
+        music.pause();
+        musicBtn.classList.remove('bg-gold', 'text-black', 'animate-spin-slow');
+        musicIcon.classList.replace('fa-pause', 'fa-music');
+    }
+};
+
+// Add this to your <style> section for a classy slow rotation
+/*
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+}
+*/
+    </script>
+</body>
+</html>
