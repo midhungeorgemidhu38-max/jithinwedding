@@ -427,15 +427,28 @@
     <section id="rsvp" class="py-20 md:py-32 px-6 bg-white">
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="font-script text-6xl md:text-7xl text-gold mb-6">Join our Story</h2>
-            <p class="font-serif tracking-widest text-[10px] mb-12 text-gray-400 uppercase">We would love to have you with us</p>
             
-            <form class="space-y-6 md:space-y-8">
+            <form 
+                id="rsvpForm"
+                action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdPa0NHp4l3pGV4vFjjB7TwlaALp9vOUJEUJ5Ujr1hfbm58xw/formResponse" 
+                method="POST" 
+                target="hidden_iframe" 
+                onsubmit="submitted=true;"
+                class="space-y-6 md:space-y-8">
+                
                 <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-                    <input type="text" placeholder="YOUR NAME" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
-                    <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
+                    <input type="text" name="entry.1736686228" placeholder="YOUR NAME" required class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
+                    <input type="email" name="entry.476624188" placeholder="EMAIL ADDRESS" required class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
                 </div>
-                <textarea placeholder="A MESSAGE FOR THE COUPLE" rows="3" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none"></textarea>
-                <button class="w-full md:w-auto px-12 py-4 bg-gold text-white font-serif tracking-[0.3em] hover:bg-black transition-all duration-500 uppercase text-[10px]">Confirm Attendance</button>
+    
+                <textarea name="entry.147448081" placeholder="A MESSAGE FOR THE COUPLE" rows="3" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none"></textarea>
+                
+                <button 
+                    type="submit" 
+                    style="background-color: #C5A059 !important; color: white !important;"
+                    class="w-full md:w-auto px-12 py-4 font-serif tracking-[0.3em] hover:bg-black transition-all duration-500 uppercase text-[10px] opacity-100">
+                    send Wishes
+                </button>
             </form>
         </div>
     </section>
@@ -447,6 +460,20 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        var submitted = false;
+
+    function showPopup() {
+        if (submitted) {
+            // Option 1: Simple browser alert
+            alert("Thank you! Your RSVP has been received.");
+            
+            // Option 2: Reset the form so they don't submit twice
+            document.getElementById("rsvpForm").reset();
+            
+            // Reset state
+            submitted = false;
+        }
+    }
         // AOS initialization
         AOS.init({ duration: 1000, once: true, offset: 100 });
 
