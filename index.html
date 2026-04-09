@@ -95,6 +95,19 @@
             .roadmap-line { left: 20px !important; }
             .roadmap-dot { left: 20px !important; }
         }
+        #family .glass-card {
+            border-top: 3px solid var(--gold); /* Adds a premium accent line at the top */
+            transition: transform 0.3s ease;
+        }
+    
+        #family .glass-card:hover {
+            transform: translateY(-5px);
+        }
+    
+        /* Helper for the parent label tracking */
+        .tracking-widest {
+            letter-spacing: 0.25em;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -345,6 +358,70 @@
     
                 <div class="relative h-[400px] md:h-auto rounded-sm overflow-hidden border border-gold/10 shadow-lg group" data-aos="fade-left">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.923627657164!2d75.46358787492997!3d12.185599788062191!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba444f62d3232b3%3A0x7e5dd19498de1e1f!2sSt.%20Mary&#39;s%20Syro-Malabar%20Forane%20Church%2C%20Alakode!5e0!3m2!1sen!2sin!4v1775716532813!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+        </div>
+    </section>
+    <section id="family" class="py-32 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-serif tracking-widest text-xs uppercase mb-2">Our Pillars of Strength</p>
+                <h2 class="font-serif text-5xl text-gray-800">The Families</h2>
+                <div class="w-24 h-px bg-gold mx-auto mt-6 opacity-30"></div>
+            </div>
+    
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
+    
+                <div class="space-y-6" data-aos="fade-right">
+                    <div class="relative group overflow-hidden rounded-sm shadow-lg">
+                        <img src="family.jpg" alt="Groom's Family" class="w-full h-72 md:h-80 object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                            <p class="text-white font-serif tracking-widest text-xs uppercase">The Groom's Family</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card p-8 text-center border-t-2 border-gold">
+                        <h3 class="font-serif text-2xl text-gold mb-4 italic">The Valliyil Family</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div>
+                                <p class="text-[9px] tracking-[0.2em] text-gray-400 uppercase mb-1">Parents</p>
+                                <p class="text-md font-medium">Mr. George Devasia & Mrs. Shanty George</p>
+                            </div>
+                            <div>
+                                <p class="text-[9px] tracking-[0.2em] text-gray-400 uppercase mb-1">Brothers</p>
+                                <p class="text-md">Midhun George, Athul George</p>
+                            </div>
+                            <div class="pt-2">
+                                <p class="text-sm italic text-gray-500"><i class="fa-solid fa-house-chimney text-[10px] mr-1"></i> Kozhichal, Kannur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="space-y-6" data-aos="fade-left">
+                    <div class="relative group overflow-hidden rounded-sm shadow-lg">
+                        <img src="familym.jpg" alt="Bride's Family" class="w-full h-72 md:h-80 object-cover transition-transform duration-1000 group-hover:scale-105">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                            <p class="text-white font-serif tracking-widest text-xs uppercase">The Bride's Family</p>
+                        </div>
+                    </div>
+            
+                    <div class="glass-card p-8 text-center border-t-2 border-gold">
+                        <h3 class="font-serif text-2xl text-gold mb-4 italic">The Thaikal Family</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div>
+                                <p class="text-[9px] tracking-[0.2em] text-gray-400 uppercase mb-1">Parents</p>
+                                <p class="text-md font-medium">Mr. Jolly Mathew & Mrs. Daisy Jolly</p>
+                            </div>
+                            <div>
+                                <p class="text-[9px] tracking-[0.2em] text-gray-400 uppercase mb-1">Sister</p>
+                                <p class="text-md">Tressa Jolly</p>
+                            </div>
+                            <div class="pt-2">
+                                <p class="text-sm italic text-gray-500"><i class="fa-solid fa-house-chimney text-[10px] mr-1"></i> Pulingome, Kannur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>       
         </div>
     </section>
     <section id="rsvp" class="py-20 md:py-32 px-6 bg-white">
