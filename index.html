@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jithin & Mariya | Our Eternal Journey</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -21,11 +21,24 @@
             --text-muted: #666666;
         }
 
+        /* Prevent horizontal overflow globally */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--offwhite);
             color: var(--text-main);
+            /* Cursor hidden only on desktops */
             cursor: none; 
+        }
+
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            #cursor { display: none; }
         }
 
         .font-serif { font-family: 'Cinzel', serif; }
@@ -58,10 +71,16 @@
         .hero-title {
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             color: #2D2D2D;
+            /* Scale font size based on screen width */
+            font-size: clamp(4rem, 15vw, 10rem);
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            -webkit-overflow-scrolling: touch;
+        }
 
         @keyframes spin-slow {
             from { transform: rotate(0deg); }
@@ -70,9 +89,15 @@
         .animate-spin-slow {
             animation: spin-slow 8s linear infinite;
         }
+
+        /* Roadmap vertical line fix for mobile */
+        @media (max-width: 767px) {
+            .roadmap-line { left: 20px !important; }
+            .roadmap-dot { left: 20px !important; }
+        }
     </style>
 </head>
-<body>
+<body class="antialiased">
     <audio id="weddingMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -80,14 +105,14 @@
     <div class="progress-bar"></div>
     <div class="vignette"></div>
 
-    <div class="fixed bottom-8 right-8 z-50">
-        <button id="musicToggle" class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold hover:bg-gold hover:text-white transition-all">
+    <div class="fixed bottom-6 right-6 z-[60]">
+        <button id="musicToggle" class="w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm border border-gold flex items-center justify-center text-gold shadow-lg hover:bg-gold hover:text-white transition-all">
             <i class="fa-solid fa-music"></i>
         </button>
     </div>
 
-    <nav class="fixed w-full z-50 py-6 px-12 flex justify-between items-center transition-all duration-500" id="navbar">
-        <div class="text-3xl font-serif text-gold tracking-widest font-bold">J <span class="text-sm align-middle">&</span> M</div>
+    <nav class="fixed w-full z-50 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-500" id="navbar">
+        <div class="text-2xl md:text-3xl font-serif text-gold tracking-widest font-bold">J <span class="text-sm align-middle">&</span> M</div>
         <div class="hidden md:flex space-x-12 text-[10px] tracking-[0.3em] uppercase text-gray-600">
             <a href="#home" class="hover:text-gold transition">Intro</a>
             <a href="#story" class="hover:text-gold transition">Our Odyssey</a>
@@ -95,39 +120,40 @@
             <a href="#details" class="hover:text-gold transition">The Day</a>
             <a href="#rsvp" class="border border-gold px-6 py-2 hover:bg-gold hover:text-white transition">RSVP</a>
         </div>
+        <a href="#rsvp" class="md:hidden text-[10px] tracking-widest border border-gold px-4 py-1.5 text-gold">RSVP</a>
     </nav>
 
-    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <section id="home" class="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="hero1.jpg" class="w-full h-full object-cover scale-110 blur-[1px] opacity-100" id="hero-img">
             <div class="absolute inset-0 bg-white/80"></div>
         </div>
         
-        <div class="relative z-10">
-            <p class="font-serif tracking-[1em] text-gold mb-8 text-xs md:text-sm uppercase animate-pulse">We Set A Date</p>
-            <h1 class="hero-title font-script text-8xl md:text-[12rem] leading-none mb-4 text-[#2D2D2D]">Jithin <span class="text-4xl block md:inline font-serif">&</span> Mariya</h1>
-            <div class="w-32 h-px bg-gold mx-auto mb-8"></div>
-            <p class="font-serif italic text-xl md:text-2xl tracking-[0.2em] mb-4 text-[#2D2D2D]">07 • 05 • 2026</p>
-            <p class="text-sm opacity-60 font-light tracking-widest text-[#2D2D2D]">ST. MARY'S FORANE CHURCH, ALAKODE</p>
+        <div class="relative z-10 w-full max-w-4xl">
+            <p class="font-serif tracking-[0.5em] md:tracking-[1em] text-gold mb-6 text-[10px] md:text-sm uppercase animate-pulse">We Set A Date</p>
+            <h1 class="hero-title font-script leading-tight mb-4">Jithin <span class="text-3xl md:text-5xl block md:inline font-serif">&</span> Mariya</h1>
+            <div class="w-20 md:w-32 h-px bg-gold mx-auto mb-8"></div>
+            <p class="font-serif italic text-lg md:text-2xl tracking-[0.2em] mb-4 text-[#2D2D2D]">07 • 05 • 2026</p>
+            <p class="text-[10px] md:text-sm opacity-60 font-light tracking-widest text-[#2D2D2D] uppercase px-4">St. Mary's Forane Church, Alakode</p>
         </div>
 
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold text-xs tracking-widest uppercase opacity-70">
-            Scroll to Begin<br>
-            <i class="fa-solid fa-chevron-down mt-4 animate-bounce"></i>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold text-[10px] tracking-widest uppercase opacity-70">
+            Scroll<br>
+            <i class="fa-solid fa-chevron-down mt-2 animate-bounce"></i>
         </div>
     </section>
 
-    <section id="story" class="py-32 px-6 overflow-hidden bg-white">
+    <section id="story" class="py-20 md:py-32 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center gap-20">
-                <div class="relative w-full md:w-1/2" data-aos="fade-right">
-                    <div class="absolute -top-10 -left-10 w-64 h-64 border border-gold/20 hidden md:block"></div>
-                    <img src="NEE03104.jpg" class="relative z-10 hover:sepia-[0.3] transition-all duration-1000 shadow-xl" alt="Our Story">
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <div class="relative w-full md:w-1/2" data-aos="fade-up">
+                    <div class="absolute -top-6 -left-6 w-32 h-32 border border-gold/20 hidden md:block"></div>
+                    <img src="NEE03104.jpg" class="relative z-10 w-full shadow-xl" alt="Our Story">
                 </div>
-                <div class="w-full md:w-1/2 space-y-8" data-aos="fade-left">
-                    <h2 class="font-serif text-5xl text-gold">The First Chapter</h2>
-                    <p class="text-lg leading-relaxed font-light text-gray-500 italic">"We started as strangers, lockdown separated us... but destiny had other plans."</p>
-                    <p class="leading-relaxed text-gray-600">
+                <div class="w-full md:w-1/2 space-y-6 md:space-y-8" data-aos="fade-up">
+                    <h2 class="font-serif text-4xl md:text-5xl text-gold">The First Chapter</h2>
+                    <p class="text-base md:text-lg leading-relaxed font-light text-gray-500 italic">"We started as strangers, lockdown separated us... but destiny had other plans."</p>
+                    <p class="leading-relaxed text-gray-600 text-sm md:text-base">
                         What started as a simple chat evolved into a deep, silent understanding. Without even saying the words, our souls knew.
                     </p>
                     <div class="pt-8 border-t border-gold/20 flex items-center space-x-6">
@@ -136,130 +162,94 @@
                             <span class="text-[10px] uppercase tracking-widest text-gray-400">May 2026</span>
                         </div>
                         <div class="h-10 w-px bg-gold/30"></div>
-                        <p class="text-sm font-serif tracking-widest uppercase text-gray-500">The Forever Begins</p>
+                        <p class="text-[10px] md:text-sm font-serif tracking-widest uppercase text-gray-500">The Forever Begins</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-        <section id="roadmap" class="py-32 px-6 bg-[#FFF9FB]">
+
+    <section id="roadmap" class="py-20 md:py-32 px-6 bg-[#FFF9FB]">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <p class="text-gold font-serif tracking-widest text-xs uppercase mb-2">The Journey</p>
-                <h2 class="font-serif text-4xl text-gray-800">Our Wedding Roadmap</h2>
-                <div class="w-20 h-px bg-gold/20 mx-auto mt-6"></div>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-serif tracking-widest text-[10px] uppercase mb-2">The Journey</p>
+                <h2 class="font-serif text-3xl md:text-4xl text-gray-800">Our Wedding Roadmap</h2>
+                <div class="w-16 h-px bg-gold/20 mx-auto mt-4"></div>
             </div>
-    
+
             <div class="relative">
-                <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-gold/20"></div>
-    
-                <div class="space-y-16">
-                    <div class="roadmap-item relative flex flex-col md:flex-row items-center" data-date="2026-02-01" data-aos="fade-up">
+                <div class="roadmap-line absolute left-[20px] md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-gold/20"></div>
+
+                <div class="space-y-12 md:space-y-16">
+                    <div class="roadmap-item relative flex flex-col md:flex-row items-start md:items-center" data-date="2026-02-01" data-aos="fade-up">
                         <div class="flex-1 md:text-right md:pr-12 w-full pl-12 md:pl-0">
-                            <h3 class="font-serif text-xl text-gray-800">Pennu Kaanal</h3>
-                            <p class="text-gold font-serif text-sm">February 01, 2026</p>
+                            <h3 class="font-serif text-lg md:text-xl text-gray-800">Pennu Kaanal</h3>
+                            <p class="text-gold font-serif text-xs md:text-sm">February 01, 2026</p>
                         </div>
-                        <div class="roadmap-dot absolute left-4 md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
+                        <div class="roadmap-dot absolute left-[20px] md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
                         <div class="flex-1 md:pl-12 w-full pl-12 md:pl-0 mt-2 md:mt-0">
-                            <span class="status-label text-[10px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
+                            <span class="status-label text-[9px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
                         </div>
                     </div>
-    
-                    <div class="roadmap-item relative flex flex-col md:flex-row items-center" data-date="2026-02-15" data-aos="fade-up">
+
+                    <div class="roadmap-item relative flex flex-col md:flex-row items-start md:items-center" data-date="2026-02-15" data-aos="fade-up">
                         <div class="flex-1 md:text-right md:pr-12 w-full pl-12 md:pl-0">
-                            <h3 class="font-serif text-xl text-gray-800">Fixation</h3>
-                            <p class="text-gold font-serif text-sm">February 15, 2026</p>
+                            <h3 class="font-serif text-lg md:text-xl text-gray-800">Fixation</h3>
+                            <p class="text-gold font-serif text-xs md:text-sm">February 15, 2026</p>
                         </div>
-                        <div class="roadmap-dot absolute left-4 md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
+                        <div class="roadmap-dot absolute left-[20px] md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
                         <div class="flex-1 md:pl-12 w-full pl-12 md:pl-0 mt-2 md:mt-0">
-                            <span class="status-label text-[10px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
+                            <span class="status-label text-[9px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
                         </div>
                     </div>
-    
-                    <div class="roadmap-item relative flex flex-col md:flex-row items-center" data-date="2026-04-15" data-aos="fade-up">
+
+                    <div class="roadmap-item relative flex flex-col md:flex-row items-start md:items-center" data-date="2026-04-15" data-aos="fade-up">
                         <div class="flex-1 md:text-right md:pr-12 w-full pl-12 md:pl-0">
-                            <h3 class="font-serif text-xl text-gray-800">Engagement</h3>
-                            <p class="text-gold font-serif text-sm">April 15, 2026</p>
+                            <h3 class="font-serif text-lg md:text-xl text-gray-800">Engagement</h3>
+                            <p class="text-gold font-serif text-xs md:text-sm">April 15, 2026</p>
                         </div>
-                        <div class="roadmap-dot absolute left-4 md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
+                        <div class="roadmap-dot absolute left-[20px] md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
                         <div class="flex-1 md:pl-12 w-full pl-12 md:pl-0 mt-2 md:mt-0">
-                            <span class="status-label text-[10px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
+                            <span class="status-label text-[9px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
                         </div>
                     </div>
-    
-                    <div class="roadmap-item relative flex flex-col md:flex-row items-center" data-date="2026-05-06" data-aos="fade-up">
+
+                    <div class="roadmap-item relative flex flex-col md:flex-row items-start md:items-center" data-date="2026-05-06" data-aos="fade-up">
                         <div class="flex-1 md:text-right md:pr-12 w-full pl-12 md:pl-0">
-                            <h3 class="font-serif text-xl text-gray-800">Maduram Veppu</h3>
-                            <p class="text-gold font-serif text-sm">May 06, 2026</p>
+                            <h3 class="font-serif text-lg md:text-xl text-gray-800">Maduram Veppu</h3>
+                            <p class="text-gold font-serif text-xs md:text-sm">May 06, 2026</p>
                         </div>
-                        <div class="roadmap-dot absolute left-4 md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
+                        <div class="roadmap-dot absolute left-[20px] md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
                         <div class="flex-1 md:pl-12 w-full pl-12 md:pl-0 mt-2 md:mt-0">
-                            <span class="status-label text-[10px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
+                            <span class="status-label text-[9px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
                         </div>
                     </div>
-    
-                    <div class="roadmap-item relative flex flex-col md:flex-row items-center" data-date="2026-05-07" data-aos="fade-up">
+
+                    <div class="roadmap-item relative flex flex-col md:flex-row items-start md:items-center" data-date="2026-05-07" data-aos="fade-up">
                         <div class="flex-1 md:text-right md:pr-12 w-full pl-12 md:pl-0">
-                            <h3 class="font-serif text-xl text-gray-800">Marriage</h3>
-                            <p class="text-gold font-serif text-sm">May 07, 2026</p>
+                            <h3 class="font-serif text-lg md:text-xl text-gray-800 font-bold">Marriage</h3>
+                            <p class="text-gold font-serif text-xs md:text-sm">May 07, 2026</p>
                         </div>
-                        <div class="roadmap-dot absolute left-4 md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
+                        <div class="roadmap-dot absolute left-[20px] md:left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold z-10 transition-all duration-500"></div>
                         <div class="flex-1 md:pl-12 w-full pl-12 md:pl-0 mt-2 md:mt-0">
-                            <span class="status-label text-[10px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
+                            <span class="status-label text-[9px] tracking-widest uppercase py-1 px-3 rounded-full border border-gold/20 text-gray-400">Scheduled</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <style>
-        /* Styling for completed items */
-        .completed-event h3 {
-            text-decoration: line-through;
-            opacity: 0.5;
-        }
-        .completed-event .roadmap-dot {
-            background: var(--gold) !important;
-            box-shadow: 0 0 10px var(--gold);
-        }
-        .completed-event .status-label {
-            background: var(--gold);
-            color: white !important;
-            border-color: var(--gold);
-        }
-    </style>
-    
-    <script>
-        // Logic to validate dates in real-time
-        function validateRoadmap() {
-            const today = new Date();
-            // Today is: 2026-04-09
-            
-            document.querySelectorAll('.roadmap-item').forEach(item => {
-                const eventDate = new Date(item.getAttribute('data-date'));
-                const statusLabel = item.querySelector('.status-label');
-                
-                if (today >= eventDate) {
-                    item.classList.add('completed-event');
-                    statusLabel.innerText = "Completed ✓";
-                }
-            });
-        }
-    
-        // Run on load
-        window.addEventListener('DOMContentLoaded', validateRoadmap);
-    </script>
-    <section id="gallery" class="py-32 bg-[#FFF9FB]">
-        <div class="px-12 mb-16 flex justify-between items-end">
+
+    <section id="gallery" class="py-20 md:py-32 bg-white">
+        <div class="px-6 md:px-12 mb-12 flex justify-between items-end">
             <div>
-                <p class="text-gold tracking-widest text-xs uppercase mb-2">Cinematic Stills</p>
-                <h2 class="font-serif text-4xl text-gray-800">Gallery of Love</h2>
+                <p class="text-gold tracking-widest text-[10px] uppercase mb-2">Cinematic Stills</p>
+                <h2 class="font-serif text-3xl md:text-4xl text-gray-800">Gallery of Love</h2>
             </div>
-            <p class="hidden md:block text-xs italic text-gray-400">Scroll to explore our moments →</p>
+            <p class="hidden md:block text-[10px] italic text-gray-400 uppercase tracking-widest">Swipe to explore →</p>
         </div>
         
-        <div class="flex space-x-6 overflow-x-auto pb-12 px-12 no-scrollbar" id="filmstrip">
+        <div class="flex space-x-4 md:space-x-6 overflow-x-auto pb-8 px-6 md:px-12 no-scrollbar" id="filmstrip">
             <div class="min-w-[300px] md:min-w-[450px] h-[600px] overflow-hidden group border border-white/5">
                 <img src="Media (1).jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             </div>
@@ -284,150 +274,125 @@
         </div>
     </section>
 
-    <section id="details" class="py-32 px-6 bg-white">
-        <div class="max-w-5xl mx-auto glass-card p-12 md:p-16 relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-10 opacity-5">
-                <i class="fa-solid fa-rings-wedding text-9xl text-gold"></i>
-            </div>
+    <section id="details" class="py-20 md:py-32 px-4 md:px-6 bg-[#FFF9FB]">
+        <div class="max-w-5xl mx-auto glass-card p-8 md:p-16 relative overflow-hidden">
+            <h2 class="font-serif text-4xl md:text-5xl mb-12 text-gold text-center">The Wedding</h2>
             
-            <h2 class="font-serif text-5xl mb-16 text-gold text-center">The Wedding</h2>
-            
-            <div class="flex flex-col md:flex-row items-center gap-12 border-b border-gold/10 pb-16">
-                <div class="w-full md:w-1/2" data-aos="fade-right">
-                    <div class="relative p-2 border border-gold/20 rounded-sm">
-                        <img src="church.jpg" alt="St. Mary's Forane Church" class="w-full h-64 object-cover shadow-md transition-all duration-700">
-                        <div class="absolute -bottom-4 -right-4 w-20 h-20 border-r border-b border-gold/30"></div>
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 border-b border-gold/10 pb-12">
+                <div class="w-full md:w-1/2" data-aos="fade-up">
+                    <div class="relative p-1 border border-gold/20">
+                        <img src="church.jpg" alt="St. Mary's Forane Church" class="w-full h-56 md:h-64 object-cover shadow-md">
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/2 text-left" data-aos="fade-left">
-                    <h4 class="font-serif text-lg tracking-widest text-gold mb-4 uppercase">Ceremony</h4>
-                    <p class="text-3xl mb-2 text-gray-800 font-serif">10:30 AM</p>
-                    <p class="text-gray-600 leading-relaxed text-lg italic mb-6">
+                <div class="w-full md:w-1/2 text-center md:text-left" data-aos="fade-up">
+                    <h4 class="font-serif text-sm tracking-widest text-gold mb-2 uppercase">Ceremony</h4>
+                    <p class="text-3xl md:text-4xl mb-2 text-gray-800 font-serif">10:30 AM</p>
+                    <p class="text-gray-600 leading-relaxed text-base italic">
                         St. Mary's Syro-Malabar Forane Church<br>
                         Alakode, Kerala
                     </p>
                 </div>
             </div>
 
-            <div id="countdown" class="mt-16 flex justify-center space-x-4 md:space-x-12">
+            <div id="countdown" class="mt-12 flex justify-center space-x-6 md:space-x-12">
                 <div class="text-center">
-                    <span id="days" class="block text-5xl font-serif text-gold">00</span>
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-400">Days</span>
+                    <span id="days" class="block text-3xl md:text-5xl font-serif text-gold">00</span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400">Days</span>
                 </div>
                 <div class="text-center">
-                    <span id="hours" class="block text-5xl font-serif text-gold">00</span>
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-400">Hours</span>
+                    <span id="hours" class="block text-3xl md:text-5xl font-serif text-gold">00</span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400">Hours</span>
                 </div>
                 <div class="text-center">
-                    <span id="minutes" class="block text-5xl font-serif text-gold">00</span>
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-400">Minutes</span>
+                    <span id="minutes" class="block text-3xl md:text-5xl font-serif text-gold">00</span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400">Mins</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="location" class="py-32 px-6 bg-[#FFF0F5]/30">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-serif text-5xl text-gold mb-4">Location & Directions</h2>
-                <div class="w-24 h-px bg-gold mx-auto opacity-30"></div>
-            </div>
-    
-            <div class="grid md:grid-cols-2 gap-12 items-stretch">
-                <div class="glass-card p-10 flex flex-col justify-between" data-aos="fade-right">
-                    <div>
-                        <i class="fa-solid fa-church text-gold text-4xl mb-6"></i>
-                        <h3 class="font-serif text-3xl mb-4 text-gray-800">The Ceremony</h3>
-                        <p class="text-xl text-gold/80 mb-2">St. Mary's Syro-Malabar Forane Church</p>
-                        <p class="text-gray-600 leading-relaxed mb-8">
-                            Alakode, Kerala 670571<br>
-                            Kannur District, India
-                        </p>
-                    </div>
-    
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center">
-                                <i class="fa-solid fa-car text-gold"></i>
-                            </div>
-                            <p class="text-xs tracking-widest text-gray-400 uppercase">Ample parking available at venue</p>
-                        </div>
-                        
-                        <div class="pt-6 border-t border-gold/10 flex items-center justify-between">
-                            <a href="#" target="_blank" class="bg-gold text-white px-8 py-3 font-serif text-xs tracking-[0.2em] hover:bg-black transition-all duration-500">
-                                OPEN IN MAPS
-                            </a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="relative h-[400px] md:h-auto rounded-sm overflow-hidden border border-gold/10 shadow-lg group" data-aos="fade-left">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3896.7!2d75.6!3d12.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA2JzAwLjAiTiA3NcKwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="rsvp" class="py-32 px-6 bg-white">
+    <section id="rsvp" class="py-20 md:py-32 px-6 bg-white">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="font-script text-7xl text-gold mb-8">Join our Story</h2>
-            <p class="font-serif tracking-widest text-sm mb-12 text-gray-400 uppercase">We would love to have you with us</p>
+            <h2 class="font-script text-6xl md:text-7xl text-gold mb-6">Join our Story</h2>
+            <p class="font-serif tracking-widest text-[10px] mb-12 text-gray-400 uppercase">We would love to have you with us</p>
             
-            <form class="space-y-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <input type="text" placeholder="YOUR NAME" class="bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase text-gray-700">
-                    <input type="email" placeholder="EMAIL ADDRESS" class="bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase text-gray-700">
+            <form class="space-y-6 md:space-y-8">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                    <input type="text" placeholder="YOUR NAME" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
+                    <input type="email" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none">
                 </div>
-                <textarea placeholder="A MESSAGE FOR THE COUPLE" rows="4" class="w-full bg-transparent border-b border-gold/30 py-4 focus:outline-none focus:border-gold transition text-xs tracking-widest uppercase text-gray-700"></textarea>
-                <button class="px-16 py-4 bg-gold text-white font-serif tracking-[0.5em] hover:bg-black transition-all duration-500 uppercase text-xs">Confirm Attendance</button>
+                <textarea placeholder="A MESSAGE FOR THE COUPLE" rows="3" class="w-full bg-transparent border-b border-gold/30 py-3 focus:outline-none focus:border-gold transition text-[10px] tracking-widest uppercase text-gray-700 rounded-none"></textarea>
+                <button class="w-full md:w-auto px-12 py-4 bg-gold text-white font-serif tracking-[0.3em] hover:bg-black transition-all duration-500 uppercase text-[10px]">Confirm Attendance</button>
             </form>
         </div>
     </section>
 
-    <footer class="py-20 text-center border-t border-gray-100 bg-white">
-        <div class="font-serif text-4xl tracking-[0.8em] text-gold/20 mb-8">J & M</div>
-        <p class="text-[10px] tracking-[0.5em] text-gray-400 uppercase font-light">With God's grace and your blessings</p>
+    <footer class="py-16 text-center border-t border-gray-50 bg-white px-6">
+        <div class="font-serif text-3xl tracking-[0.5em] text-gold/20 mb-6">J & M</div>
+        <p class="text-[9px] tracking-[0.3em] text-gray-400 uppercase font-light leading-loose">With God's grace and your blessings<br>© 2026 Jithin & Mariya</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1500, once: true });
+        // AOS initialization
+        AOS.init({ duration: 1000, once: true, offset: 100 });
 
+        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        }
 
+        // Navbar & Progress Bar Logic
         window.onscroll = () => {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             document.querySelector(".progress-bar").style.width = scrolled + "%";
             
+            const navbar = document.getElementById('navbar');
             if (winScroll > 50) {
-                document.getElementById('navbar').classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
+                navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.remove('py-4');
             } else {
-                document.getElementById('navbar').classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.add('py-4');
             }
         };
 
+        // Hero Parallax
         gsap.registerPlugin(ScrollTrigger);
         gsap.to("#hero-img", {
-            scrollTrigger: { scrub: true },
-            y: 100, scale: 1.2
+            scrollTrigger: { 
+                trigger: "#home",
+                start: "top top",
+                end: "bottom top",
+                scrub: true 
+            },
+            y: 80, 
+            scale: 1.15
         });
 
-        const weddingDate = new Date("May 07, 2026 09:00:00").getTime();
-        setInterval(() => {
+        // Countdown Logic
+        const weddingDate = new Date("May 07, 2026 10:30:00").getTime();
+        function updateCountdown() {
             const now = new Date().getTime();
             const diff = weddingDate - now;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        }, 1000);
+            
+            if (diff > 0) {
+                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
+        // Music Control
         const music = document.getElementById('weddingMusic');
         const musicBtn = document.getElementById('musicToggle');
         const musicIcon = musicBtn.querySelector('i');
@@ -443,6 +408,24 @@
                 musicIcon.classList.replace('fa-pause', 'fa-music');
             }
         };
+
+        // Roadmap Date Validation
+        function validateRoadmap() {
+            const today = new Date();
+            document.querySelectorAll('.roadmap-item').forEach(item => {
+                const eventDate = new Date(item.getAttribute('data-date'));
+                const statusLabel = item.querySelector('.status-label');
+                if (today >= eventDate) {
+                    item.style.opacity = "0.7";
+                    item.querySelector('h3').style.textDecoration = "line-through";
+                    item.querySelector('.roadmap-dot').style.background = "var(--gold)";
+                    statusLabel.innerText = "Completed ✓";
+                    statusLabel.style.background = "var(--gold)";
+                    statusLabel.style.color = "white";
+                }
+            });
+        }
+        window.addEventListener('DOMContentLoaded', validateRoadmap);
     </script>
 </body>
 </html>
