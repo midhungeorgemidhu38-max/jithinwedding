@@ -136,10 +136,19 @@
         <a href="#rsvp" class="md:hidden text-[10px] tracking-widest border border-gold px-4 py-1.5 text-gold">RSVP</a>
     </nav>
 
-    <section id="home" class="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+     <section id="home" class="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="hero1.jpg" class="w-full h-full object-cover scale-110 blur-[1px] opacity-100" id="hero-img">
-            <div class="absolute inset-0 bg-white/80"></div>
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                id="hero-vid" 
+                class="w-full h-full object-cover scale-110 opacity-100">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            
+            <div class="absolute inset-0 bg-white/40 md:bg-white/30 backdrop-blur-[1px]"></div>
         </div>
         
         <div class="relative z-10 w-full max-w-4xl">
@@ -149,7 +158,7 @@
             <p class="font-serif italic text-lg md:text-2xl tracking-[0.2em] mb-4 text-[#2D2D2D]">07 • 05 • 2026</p>
             <p class="text-[10px] md:text-sm opacity-60 font-light tracking-widest text-[#2D2D2D] uppercase px-4">St. Mary's Forane Church, Alakode</p>
         </div>
-
+    
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-gold text-[10px] tracking-widest uppercase opacity-70">
             Scroll<br>
             <i class="fa-solid fa-chevron-down mt-2 animate-bounce"></i>
@@ -587,5 +596,18 @@ function closePopup() {
         }
         window.addEventListener('DOMContentLoaded', validateRoadmap);
     </script>
+    <script>
+    // Change "#hero-img" to "#hero-vid"
+    gsap.to("#hero-vid", {
+        scrollTrigger: { 
+            trigger: "#home",
+            start: "top top",
+            end: "bottom top",
+            scrub: true 
+        },
+        y: 80, 
+        scale: 1.15
+    });
+</script>
 </body>
 </html>
